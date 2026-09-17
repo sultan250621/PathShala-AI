@@ -1,6 +1,6 @@
-# mobileapps
+# PathSala Ai
 
-A new Flutter project.
+A new Flutter project For Rural Student.
 
 ## Getting Started
 

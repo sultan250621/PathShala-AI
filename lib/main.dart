@@ -70,7 +70,7 @@ class _OfflineDemoScreenState extends State<OfflineDemoScreen> {
             padding: const EdgeInsets.all(16.0),
             child: ElevatedButton(
               onPressed: () => addNote('Note saved at ${DateTime.now()}'),
-              child: const Text('Save a Note (No Internet Needed)'),
+              child: const Text('Save a Note (No Internet Needed for rural student)'),
             ),
           ),
           Expanded(
