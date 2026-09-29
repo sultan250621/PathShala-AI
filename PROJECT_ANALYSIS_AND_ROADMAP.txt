@@ -1,0 +1,108 @@
+================================================================================
+COMPREHENSIVE PROJECT ANALYSIS & CODEBASE UPDATE PLAN
+================================================================================
+Project: Adaptive Mobile Learning App for Rural Students Using Offline-First AI Tutoring
+Student: Sultan Mahmud Ibra (Roll: 250621, Contact: 01609469431)
+Supervisor: Tarun Debnath, Assistant Professor, Dept. of ICE, PUST
+Scope: 8-Week Research & Development Roadmap
+================================================================================
+
+1. PROJECT GUIDE DEEP ANALYSIS & NOVELTY
+--------------------------------------------------------------------------------
+- Core Problem: Ed-tech platforms fail in rural areas due to continuous internet dependency.
+- Novelty: Offline-first on-device AI architecture with intelligent sync-when-available cloud backup.
+- Key Milestones:
+  * Week 1: Literature review, on-device AI runtime exploration, Class 6-8 Math scope.
+  * Week 2: Core app skeleton and SQLite database schema.
+  * Week 3: 60-100+ NCTB curriculum-aligned question bank + quiz UI.
+  * Week 4: On-device AI model integration for offline explanations/hints.
+  * Week 5: Rule-based adaptive difficulty logic (3-correct up / 2-wrong down).
+  * Week 6: Sync-when-available pipeline via connectivity_plus and Firebase.
+  * Week 7: Usability testing with 3-5 users & performance optimization.
+  * Week 8: End-to-end testing, architecture diagrams, final report.
+
+2. CURRENT CODEBASE AUDIT (c:\dev\)
+--------------------------------------------------------------------------------
+- Architecture: Monolithic 447-line lib/main.dart containing all logic, database code, and UI.
+- Dependencies: Only sqflite, path, and cupertino_icons in pubspec.yaml.
+- Database: Basic SQLite tables (questions, progress). Only 15 hardcoded questions in Dart code.
+- Question Bank: 15 questions total (5 Fractions, 5 Algebra, 5 Geometry). Insufficient for NCTB standard.
+- Quiz Logic: Sequential traversal (question 1 to N). No adaptive engine.
+- AI Tutor: Completely missing. No hint generation or offline explanation mechanism.
+- Cloud Sync: Completely missing. No connectivity listener or Firebase sync queue.
+- Test Suite: Outdated default template widget_test.dart.
+
+3. GAP ANALYSIS SUMMARY
+--------------------------------------------------------------------------------
+Requirement                         Current Code Status          Required Action
+--------------------------------------------------------------------------------
+Clean Modular Architecture          All in main.dart (Fail)      Split into models, database, services, screens
+NCTB Question Bank (60-100+)        15 hardcoded questions       Add 100+ questions JSON dataset + bulk loader
+Adaptive Difficulty Algorithm       Linear sequence (Fail)       Build AdaptiveEngine service with streak rules
+On-Device AI Tutor                  Not implemented (Fail)       Build AITutorService & offline hint modal
+Sync-When-Available                 Not implemented (Fail)       Add connectivity_plus + Firebase SyncService
+Unit & Widget Tests                 Broken template (Fail)       Add unit tests for DB, AdaptiveEngine & widgets
+
+4. PROPOSED MODULAR ARCHITECTURE
+--------------------------------------------------------------------------------
+lib/
+  ├── main.dart                       (App entry, Firebase init, theme)
+  ├── constants/                      (Colors, NCTB topics, difficulty constants)
+  ├── models/
+  │   ├── question_model.dart         (Question entity with hint & explanation)
+  │   ├── progress_model.dart         (Topic mastery & streak tracking)
+  │   └── sync_log_model.dart         (Offline sync queue model)
+  ├── database/
+  │   ├── db_helper.dart              (DB lifecycle & migrations)
+  │   ├── question_dao.dart           (Queries filtered by topic & difficulty)
+  │   └── progress_dao.dart           (Progress & streak data access)
+  ├── services/
+  │   ├── adaptive_engine.dart        (3-correct / 2-wrong rule engine)
+  │   ├── ai_tutor_service.dart       (Offline on-device AI hint & explanation service)
+  │   ├── connectivity_service.dart   (Network status stream)
+  │   └── sync_service.dart           (Auto-sync SQLite to Firebase)
+  ├── screens/
+  │   ├── home_screen.dart            (Dashboard with progress & sync pill)
+  │   ├── topic_selection_screen.dart (NCTB topic selection)
+  │   ├── quiz_screen.dart            (Adaptive quiz with AI hint button)
+  │   └── quiz_result_screen.dart     (Summary, review, and AI study tips)
+  └── widgets/
+      ├── ai_hint_dialog.dart         (Bottom sheet/dialog for offline AI hints)
+      ├── connectivity_banner.dart    (Online/Offline status pill)
+      └── progress_card.dart          (Visual progress tracker)
+assets/
+  └── data/
+      └── nctb_math_questions.json    (100+ NCTB curriculum questions)
+
+5. WHY AND WHERE CODE IS UPDATING
+--------------------------------------------------------------------------------
+1. pubspec.yaml:
+   - Add: connectivity_plus, firebase_core, cloud_firestore, shared_preferences.
+   - Register assets/data/nctb_math_questions.json.
+   - Why: Enables network monitoring, Firebase sync, and JSON question asset loading.
+
+2. lib/models/ & lib/database/:
+   - Add: question_model.dart, progress_model.dart, db_helper.dart, question_dao.dart.
+   - Why: Decouples business logic, supports hint/explanation fields, and handles bulk JSON loading.
+
+3. lib/services/adaptive_engine.dart:
+   - Add: Dynamic difficulty state machine (tracks consecutive correct/wrong answers).
+   - Why: Implements Week 5 guide requirement to serve Easy -> Medium -> Hard questions adaptively.
+
+4. lib/services/ai_tutor_service.dart & widgets/ai_hint_dialog.dart:
+   - Add: On-device explanation and hint generation logic.
+   - Why: Implements Week 4 guide requirement for offline AI tutoring without internet data costs.
+
+5. lib/services/sync_service.dart & connectivity_service.dart:
+   - Add: Background connectivity listener and SQLite-to-Firestore synchronization.
+   - Why: Implements Week 6 requirement for automatic syncing when internet becomes available.
+
+6. lib/screens/ & lib/widgets/:
+   - Split main.dart into dedicated screens and reusable widgets.
+   - Add "Ask AI Tutor" button, dynamic progress bars, and offline/online status banners.
+   - Why: Enhances usability, separation of concerns, and visual appeal for Week 7 evaluation.
+
+7. test/:
+   - Add unit tests for AdaptiveEngine and Database operations.
+   - Why: Ensures software reliability and regression prevention for Week 8 deliverables.
+================================================================================

@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "class_level": 6,
+      "topic": "স্বাভাবিক সংখ্যা ও ভগ্নাংশ (Fractions & Natural Numbers)",
+      "difficulty": 1,
+      "question_text": "কোনটি মৌলিক সংখ্যা (Prime Number)?",
+      "option_a": "৪",
+      "option_b": "৯",
+      "option_c": "২",
+      "option_d": "১",
+      "correct_option": "C",
+      "hint": "যে সংখ্যার ১ এবং সেই সংখ্যা ছাড়া অন্য কোনো গুণনীয়ক নেই।",
+      "explanation": "২ একমাত্র জোড় মৌলিক সংখ্যা। ১ মৌলিক বা যৌগিক কোনোটিই নয়।"
+    },
+    {
+      "class_level": 6,
+      "topic": "স্বাভাবিক সংখ্যা ও ভগ্নাংশ (Fractions & Natural Numbers)",
+      "difficulty": 2,
+      "question_text": "১/২ + ১/৪ এর মান কত?",
+      "option_a": "২/৬",
+      "option_b": "৩/৪",
+      "option_c": "১/৬",
+      "option_d": "২/৪",
+      "correct_option": "B",
+      "hint": "ভগ্নাংশ দুটির হরগুলোর লসাগু বের করে সমহর বিশিষ্ট ভগ্নাংশে রূপান্তর করো।",
+      "explanation": "১/২ = ২/৪। সুতরাং ২/৪ + ১/৪ = (২ + ১)/৪ = ৩/৪।"
+    },
+    {
+      "class_level": 6,
+      "topic": "বীজগণিতীয় রাশি (Algebraic Expressions)",
+      "difficulty": 1,
+      "question_text": "Solve the linear equation: x + 7 = 15. What is the value of x?",
+      "option_a": "x = 7",
+      "option_b": "x = 8",
+      "option_c": "x = 22",
+      "option_d": "x = 105",
+      "correct_option": "B",
+      "hint": "Subtract 7 from both sides of the equation.",
+      "explanation": "Subtracting 7 from both sides gives x = 15 - 7 = 8."
+    },
+    {
+      "class_level": 6,
+      "topic": "বীজগণিতীয় রাশি (Algebraic Expressions)",
+      "difficulty": 3,
+      "question_text": "If a = 3 and b = 2, what is the value of 3a² - 2b + 5?",
+      "option_a": "26",
+      "option_b": "28",
+      "option_c": "32",
+      "option_d": "18",
+      "correct_option": "B",
+      "hint": "First calculate a² = 3² = 9, then multiply and substitute values.",
+      "explanation": "3(3²) - 2(2) + 5 = 3(9) - 4 + 5 = 27 - 4 + 5 = 28."
+    },
+    {
+      "class_level": 6,
+      "topic": "জ্যামিতির মৌলিক ধারণা (Basic Geometry)",
+      "difficulty": 2,
+      "question_text": "একটি ত্রিভুজের তিনটি কোণের সমষ্টি কত ডিগ্রি?",
+      "option_a": "৯০°",
+      "option_b": "৩৬০°",
+      "option_c": "১৮০°",
+      "option_d": "২৭০°",
+      "correct_option": "C",
+      "hint": "যেকোনো সমতলীয় ত্রিভুজের তিন কোণের যোগফল দুই সমকোণের সমান।",
+      "explanation": "ত্রিভুজের তিন কোণের সমষ্টি ১৮০° বা দুই সমকোণ।"
+    },
+    {
+      "class_level": 6,
+      "topic": "জ্যামিতির মৌলিক ধারণা (Basic Geometry)",
+      "difficulty": 3,
+      "question_text": "A rectangular garden has length 12 meters and width 8 meters. What is its perimeter?",
+      "option_a": "96 meters",
+      "option_b": "40 meters",
+      "option_c": "20 meters",
+      "option_d": "48 meters",
+      "correct_option": "B",
+      "hint": "Perimeter of a rectangle = 2 × (length + width).",
+      "explanation": "Perimeter = 2 × (12 + 8) = 2 × 20 = 40 meters."
+    }
+  ]
+}
