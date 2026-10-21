@@ -12,6 +12,7 @@ class AppConstants {
 
   // Metadata Keys
   static const String keyQuestionBankVersion = 'question_bank_version';
+  static const String keyQuestionBankDataVersion = 'question_bank_data_version';
 
   // Asset Paths
   static const String questionBankAsset = 'assets/data/nctb_math_questions.json';

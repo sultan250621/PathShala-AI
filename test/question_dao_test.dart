@@ -192,5 +192,118 @@ void main() {
       expect(randomQuestions.length, equals(2));
       expect(randomQuestions[0].id != randomQuestions[1].id, isTrue);
     });
+
+    test('QuestionDao re-seeds when data_version increases and preserves existing question IDs', () async {
+      // Seed version 1
+      final seededV1 = await QuestionDao.seedQuestionBank(
+        jsonContent: sampleJsonContent,
+        database: db,
+      );
+      expect(seededV1, isTrue);
+
+      final initialQuestions = await QuestionDao.getQuestionsByTopic('Fractions', database: db);
+      expect(initialQuestions.length, equals(2));
+      final originalId1 = initialQuestions[0].id;
+      final originalId2 = initialQuestions[1].id;
+      expect(originalId1, isNotNull);
+      expect(originalId2, isNotNull);
+
+      // New chapter content with data_version: 2, containing the original questions plus 1 new question
+      const version2JsonContent = '''
+      {
+        "data_version": 2,
+        "questions": [
+          {
+            "class_level": 6,
+            "topic": "Fractions",
+            "difficulty": 1,
+            "question_text": "What is 1/2 + 1/4?",
+            "option_a": "3/4",
+            "option_b": "2/6",
+            "option_c": "1/6",
+            "option_d": "2/4",
+            "correct_option": "A",
+            "hint": "Find common denominator",
+            "explanation": "1/2 = 2/4, 2/4 + 1/4 = 3/4"
+          },
+          {
+            "class_level": 6,
+            "topic": "Fractions",
+            "difficulty": 2,
+            "question_text": "What is 2/3 x 3/4?",
+            "option_a": "1/2",
+            "option_b": "6/7",
+            "option_c": "5/7",
+            "option_d": "2/4",
+            "correct_option": "A",
+            "hint": "Multiply numerators and denominators",
+            "explanation": "6/12 simplifies to 1/2"
+          },
+          {
+            "class_level": 6,
+            "topic": "Algebra",
+            "difficulty": 1,
+            "question_text": "Solve x + 5 = 12",
+            "option_a": "x = 7",
+            "option_b": "x = 17",
+            "option_c": "x = 5",
+            "option_d": "x = 12",
+            "correct_option": "A",
+            "hint": "Subtract 5 from 12",
+            "explanation": "x = 12 - 5 = 7"
+          },
+          {
+            "class_level": 6,
+            "topic": "Algebra",
+            "difficulty": 3,
+            "question_text": "If x = 3, what is 2x^2 + 4?",
+            "option_a": "22",
+            "option_b": "40",
+            "option_c": "16",
+            "option_d": "10",
+            "correct_option": "A",
+            "hint": "Calculate 3^2 first",
+            "explanation": "2(9) + 4 = 22"
+          },
+          {
+            "class_level": 6,
+            "topic": "Fractions",
+            "difficulty": 3,
+            "question_text": "What is 3/4 divided by 1/2?",
+            "option_a": "3/2",
+            "option_b": "3/8",
+            "option_c": "1/2",
+            "option_d": "2/3",
+            "correct_option": "A",
+            "hint": "Invert and multiply",
+            "explanation": "3/4 x 2/1 = 6/4 = 3/2"
+          }
+        ]
+      }
+      ''';
+
+      // Seed version 2
+      final seededV2 = await QuestionDao.seedQuestionBank(
+        jsonContent: version2JsonContent,
+        database: db,
+      );
+      expect(seededV2, isTrue);
+
+      final totalCount = await QuestionDao.getTotalQuestionCount(database: db);
+      expect(totalCount, equals(5)); // 4 original + 1 new, no duplicates
+
+      // Verify that existing questions kept their original IDs
+      final reloadedFractions = await QuestionDao.getQuestionsByTopic('Fractions', database: db);
+      expect(reloadedFractions.length, equals(3));
+      final reloadedQ1 = reloadedFractions.firstWhere((q) => q.questionText == 'What is 1/2 + 1/4?');
+      final reloadedQ2 = reloadedFractions.firstWhere((q) => q.questionText == 'What is 2/3 x 3/4?');
+      expect(reloadedQ1.id, equals(originalId1));
+      expect(reloadedQ2.id, equals(originalId2));
+
+      // New question has a newly generated ID
+      final newQ = reloadedFractions.firstWhere((q) => q.questionText.contains('divided by'));
+      expect(newQ.id, isNotNull);
+      expect(newQ.id != originalId1 && newQ.id != originalId2, isTrue);
+    });
   });
 }
