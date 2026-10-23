@@ -170,8 +170,8 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   Future<bool> _confirmLeaveQuiz() async {
-    if (!_hasAnswered && _currentIndex == 0) {
-      return true; // Nothing attempted yet, exit cleanly
+    if (_questions.isEmpty || (!_hasAnswered && _currentIndex == 0)) {
+      return true; // Nothing attempted yet or empty bank, exit cleanly
     }
 
     final shouldLeave = await showDialog<bool>(
@@ -219,7 +219,9 @@ class _QuizScreenState extends State<QuizScreen> {
         if (didPop) return;
         final canLeave = await _confirmLeaveQuiz();
         if (canLeave && context.mounted) {
-          Navigator.pop(context);
+          if (Navigator.canPop(context)) {
+            Navigator.pop(context);
+          }
         }
       },
       child: Scaffold(
@@ -241,7 +243,9 @@ class _QuizScreenState extends State<QuizScreen> {
             onPressed: () async {
               final canLeave = await _confirmLeaveQuiz();
               if (canLeave && context.mounted) {
-                Navigator.pop(context);
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                }
               }
             },
           ),
@@ -271,7 +275,11 @@ class _QuizScreenState extends State<QuizScreen> {
         title: 'No Questions Found',
         message: 'No practice questions are available for this topic.',
         actionLabel: 'Return to Topics',
-        onAction: () => Navigator.pop(context),
+        onAction: () {
+          if (Navigator.canPop(context)) {
+            Navigator.pop(context);
+          }
+        },
       );
     }
 

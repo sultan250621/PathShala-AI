@@ -193,4 +193,35 @@ class ProgressDao {
     }
     await batch.commit(noResult: true);
   }
+
+  /// Safely clear all student progress and answer logs.
+  static Future<void> clearAllProgress({Database? database}) async {
+    final db = database ?? await DBHelper.getDatabase();
+    await db.transaction((txn) async {
+      await txn.delete(AppConstants.progressTable);
+      await txn.delete(AppConstants.answerLogsTable);
+    });
+  }
+
+  /// Safely clear progress and logs for specific topics.
+  static Future<void> clearProgressForTopics(
+    List<String> topics, {
+    Database? database,
+  }) async {
+    if (topics.isEmpty) return;
+    final db = database ?? await DBHelper.getDatabase();
+    final placeholders = List.filled(topics.length, '?').join(',');
+    await db.transaction((txn) async {
+      await txn.delete(
+        AppConstants.progressTable,
+        where: 'topic IN ($placeholders)',
+        whereArgs: topics,
+      );
+      await txn.delete(
+        AppConstants.answerLogsTable,
+        where: 'topic IN ($placeholders)',
+        whereArgs: topics,
+      );
+    });
+  }
 }

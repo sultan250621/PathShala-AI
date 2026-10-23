@@ -53,7 +53,11 @@ class QuestionBankMerger {
       final cLevel = q['class_level']?.toString() ?? '6';
       final topic = (q['topic']?.toString() ?? '').trim();
       final text = (q['question_text']?.toString() ?? q['question']?.toString() ?? '').trim();
-      return '${cLevel}_${topic}_$text';
+      final optA = (q['option_a']?.toString() ?? '').trim();
+      final optB = (q['option_b']?.toString() ?? '').trim();
+      final optC = (q['option_c']?.toString() ?? '').trim();
+      final optD = (q['option_d']?.toString() ?? '').trim();
+      return '${cLevel}_${topic}_${text}_${optA}_${optB}_${optC}_${optD}';
     }
     return '';
   }

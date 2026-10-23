@@ -23,11 +23,7 @@ class AppConstants {
   static const String defaultClassLabel = 'Class 6';
 
   // Fallback Topics (if empty)
-  static const List<String> defaultTopics = [
-    'স্বাভাবিক সংখ্যা ও ভগ্নাংশ (Fractions & Natural Numbers)',
-    'বীজগণিতীয় রাশি (Algebraic Expressions)',
-    'জ্যামিতির মৌলিক ধারণা (Basic Geometry)',
-  ];
+  static const List<String> defaultTopics = [];
 
   // Difficulty numeric levels
   static const int difficultyEasy = 1;

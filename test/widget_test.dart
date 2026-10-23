@@ -110,5 +110,26 @@ void main() {
       expect(fromMapQ.hint, 'Find the common denominator.');
       expect(fromMapQ.explanation, '1/2 = 2/4. 2/4 + 1/4 = 3/4.');
     });
+
+    testWidgets('QuizScreen gracefully displays empty state when questions are empty', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: QuizScreen(
+            topic: 'Algebra',
+            initialQuestions: [],
+          ),
+        ),
+      );
+
+      await tester.pump();
+
+      expect(find.text('No Questions Found'), findsOneWidget);
+      expect(find.text('No practice questions are available for this topic.'), findsOneWidget);
+      expect(find.text('Return to Topics'), findsOneWidget);
+
+      // Tap action button without crash
+      await tester.tap(find.text('Return to Topics'));
+      await tester.pump();
+    });
   });
 }

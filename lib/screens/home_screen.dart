@@ -288,9 +288,9 @@ class _HomeScreenState extends State<HomeScreen> {
         if (_topicCounts.isEmpty)
           EmptyStateView(
             icon: Icons.menu_book_rounded,
-            title: 'No Topics Found',
-            message: 'Question bank has not been initialized.',
-            actionLabel: 'Re-seed Question Bank',
+            title: 'No Topics Available',
+            message: 'No practice questions are available yet. Curriculum topics will appear once chapters are added.',
+            actionLabel: 'Refresh',
             onAction: () async {
               await QuestionLoaderService.seedQuestionBank(force: true);
               await _loadData();

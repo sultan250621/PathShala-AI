@@ -159,54 +159,107 @@ class QuestionDao {
 
     // 3. Batch re-seed while preserving existing question IDs and preventing duplicates
     await db.transaction((txn) async {
-      // Fetch existing questions
-      final existingRows = await txn.query(
-        AppConstants.questionsTable,
-        columns: ['id', 'class_level', 'topic', 'question_text'],
-      );
-
-      final Map<String, int> existingMap = {};
-      for (final row in existingRows) {
-        final id = row['id'] as int;
-        final cLevel = row['class_level'] as int? ?? AppConstants.defaultClassLevel;
-        final topic = (row['topic'] as String? ?? '').trim();
-        final qText = (row['question_text'] as String? ?? '').trim();
-        final key = '${cLevel}_${topic}_$qText';
-        existingMap[key] = id;
-      }
-
-      final batch = txn.batch();
-      for (final q in questions) {
-        final key = '${q.classLevel}_${q.topic.trim()}_${q.questionText.trim()}';
-
-        if (existingMap.containsKey(key)) {
-          final existingId = existingMap[key]!;
-          if (existingId > 0) {
-            // Update existing question while strictly keeping its existing ID
-            final updateMap = q.toMap()
-              ..['id'] = existingId
-              ..['hint'] = q.hint
-              ..['explanation'] = q.explanation;
-            batch.update(
-              AppConstants.questionsTable,
-              updateMap,
-              where: 'id = ?',
-              whereArgs: [existingId],
-            );
-          }
-        } else {
-          // New question: insert without specifying id so AUTOINCREMENT gives a new ID
-          final insertMap = q.toMap()..remove('id');
-          batch.insert(
-            AppConstants.questionsTable,
-            insertMap,
-          );
-          // Mark as seen so duplicates within the batch don't insert twice
-          existingMap[key] = -1;
+      if (questions.isEmpty) {
+        // Empty bank: clear questions, progress, and answer logs safely
+        await txn.delete(AppConstants.questionsTable);
+        try {
+          await txn.delete(AppConstants.progressTable);
+          await txn.delete(AppConstants.answerLogsTable);
+        } catch (_) {
+          // In case progress tables aren't created in isolated test harnesses
         }
-      }
+      } else {
+        // Fetch existing questions
+        final existingRows = await txn.query(
+          AppConstants.questionsTable,
+          columns: ['id', 'class_level', 'topic', 'question_text', 'option_a', 'option_b', 'option_c', 'option_d'],
+        );
 
-      await batch.commit(noResult: true);
+        final Map<String, int> existingMap = {};
+        for (final row in existingRows) {
+          final id = row['id'] as int;
+          final cLevel = row['class_level'] as int? ?? AppConstants.defaultClassLevel;
+          final topic = (row['topic'] as String? ?? '').trim();
+          final qText = (row['question_text'] as String? ?? '').trim();
+          final optA = (row['option_a'] as String? ?? '').trim();
+          final optB = (row['option_b'] as String? ?? '').trim();
+          final optC = (row['option_c'] as String? ?? '').trim();
+          final optD = (row['option_d'] as String? ?? '').trim();
+          final key = '${cLevel}_${topic}_${qText}_${optA}_${optB}_${optC}_${optD}';
+          existingMap[key] = id;
+        }
+
+        final incomingKeys = <String>{};
+        final batch = txn.batch();
+        for (final q in questions) {
+          final key = '${q.classLevel}_${q.topic.trim()}_${q.questionText.trim()}_${q.optionA.trim()}_${q.optionB.trim()}_${q.optionC.trim()}_${q.optionD.trim()}';
+          incomingKeys.add(key);
+
+          if (existingMap.containsKey(key)) {
+            final existingId = existingMap[key]!;
+            if (existingId > 0) {
+              // Update existing question while strictly keeping its existing ID
+              final updateMap = q.toMap()
+                ..['id'] = existingId
+                ..['hint'] = q.hint
+                ..['explanation'] = q.explanation;
+              batch.update(
+                AppConstants.questionsTable,
+                updateMap,
+                where: 'id = ?',
+                whereArgs: [existingId],
+              );
+            }
+          } else {
+            // New question: insert without specifying id so AUTOINCREMENT gives a new ID
+            final insertMap = q.toMap()..remove('id');
+            batch.insert(
+              AppConstants.questionsTable,
+              insertMap,
+            );
+            // Mark as seen so duplicates within the batch don't insert twice
+            existingMap[key] = -1;
+          }
+        }
+
+        // Delete questions that are no longer in the incoming question bank
+        final idsToDelete = <int>[];
+        for (final entry in existingMap.entries) {
+          if (!incomingKeys.contains(entry.key) && entry.value > 0) {
+            idsToDelete.add(entry.value);
+          }
+        }
+        if (idsToDelete.isNotEmpty) {
+          final placeholders = List.filled(idsToDelete.length, '?').join(',');
+          batch.delete(
+            AppConstants.questionsTable,
+            where: 'id IN ($placeholders)',
+            whereArgs: idsToDelete,
+          );
+        }
+
+        // Clean up progress and answer logs for topics no longer in the question bank
+        final validTopics = questions.map((q) => q.topic.trim()).toSet();
+        if (validTopics.isNotEmpty) {
+          final placeholders = List.filled(validTopics.length, '?').join(',');
+          try {
+            await txn.delete(
+              AppConstants.progressTable,
+              where: 'topic NOT IN ($placeholders)',
+              whereArgs: validTopics.toList(),
+            );
+            await txn.delete(
+              AppConstants.answerLogsTable,
+              where: 'topic NOT IN ($placeholders)',
+              whereArgs: validTopics.toList(),
+            );
+          } catch (_) {
+            // In case progress tables aren't created in isolated test harnesses
+          }
+        }
+
+        await batch.commit(noResult: true);
+      }
 
       // Record updated versions in metadata table
       await txn.insert(

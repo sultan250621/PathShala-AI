@@ -108,7 +108,7 @@ class _TopicSelectionScreenState extends State<TopicSelectionScreen> {
         icon: Icons.topic_outlined,
         title: 'No Topics Available',
         message: 'No practice questions were found for Class ${widget.classLevel} ${widget.subject}.',
-        actionLabel: 'Re-seed Question Bank',
+        actionLabel: 'Refresh',
         onAction: () async {
           await QuestionLoaderService.seedQuestionBank(force: true);
           await _loadTopics();

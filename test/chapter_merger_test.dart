@@ -93,31 +93,51 @@ void main() {
     expect(questions[1]['question_text'], equals('Solve 2x = 10'));
   });
 
-  test('QuestionBankMerger handles chapter 0 with 20 sample questions', () async {
+  test('QuestionBankMerger handles merging into an empty bank and prevents duplicates', () async {
     final targetFile = File('${tempDir.path}/nctb_math_questions_test.json');
-    final chapter0File = File('assets/data/chapters/chapter_0_sample.json');
+    final chapterFile = File('${tempDir.path}/chapter_sample.json');
 
-    expect(await chapter0File.exists(), isTrue);
+    await chapterFile.writeAsString(
+      jsonEncode({
+        'questions': List.generate(
+          10,
+          (i) => {
+            'class_level': 6,
+            'topic': 'Fractions',
+            'difficulty': 1,
+            'question_text': 'Sample Question $i',
+            'option_a': 'A',
+            'option_b': 'B',
+            'option_c': 'C',
+            'option_d': 'D',
+            'correct_option': 'A',
+            'hint': 'Hint $i',
+            'explanation': 'Explanation $i',
+          },
+        ),
+      }),
+      encoding: utf8,
+    );
 
     // Initial empty target
     final result = await QuestionBankMerger.mergeChapterFile(
-      chapterPath: chapter0File.path,
+      chapterPath: chapterFile.path,
       targetPath: targetFile.path,
     );
 
-    expect(result.addedCount, equals(20));
-    expect(result.totalCount, equals(20));
+    expect(result.addedCount, equals(10));
+    expect(result.totalCount, equals(10));
     expect(result.newVersion, equals(1));
 
-    // Merging again should detect all 20 as duplicates and not increase count
+    // Merging again should detect all 10 as duplicates and not increase count
     final secondMerge = await QuestionBankMerger.mergeChapterFile(
-      chapterPath: chapter0File.path,
+      chapterPath: chapterFile.path,
       targetPath: targetFile.path,
       forceBump: false,
     );
 
     expect(secondMerge.addedCount, equals(0));
-    expect(secondMerge.skippedCount, equals(20));
-    expect(secondMerge.totalCount, equals(20));
+    expect(secondMerge.skippedCount, equals(10));
+    expect(secondMerge.totalCount, equals(10));
   });
 }
