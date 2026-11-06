@@ -75,10 +75,10 @@ class _QuizScreenState extends State<QuizScreen> {
     });
 
     try {
-      // Random selection without repeats
+      // Fetch ALL questions for this topic in a random, non-repeating order.
+      // No artificial cap — the "Question X of Y" label reflects the real total.
       final data = await QuestionDao.getRandomQuestions(
         topic: widget.topic,
-        count: 10,
         classLevel: widget.classLevel,
         database: widget.database,
       );

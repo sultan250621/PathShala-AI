@@ -69,9 +69,13 @@ class QuestionDao {
   }
 
   /// Randomly select questions for a topic with no repeats in a session.
+  ///
+  /// If [count] is null (the default), ALL available questions for the topic
+  /// are returned in a shuffled random order. Pass an explicit [count] to cap
+  /// the result to at most that many questions.
   static Future<List<QuestionModel>> getRandomQuestions({
     required String topic,
-    int count = 10,
+    int? count,
     List<int> excludeIds = const [],
     int classLevel = AppConstants.defaultClassLevel,
     Database? database,
@@ -92,7 +96,7 @@ class QuestionDao {
       where: whereClause,
       whereArgs: whereArgs,
       orderBy: 'RANDOM()',
-      limit: count,
+      limit: count, // null → no LIMIT, returns all matching rows
     );
 
     return List.generate(maps.length, (i) => QuestionModel.fromMap(maps[i]));
@@ -185,7 +189,7 @@ class QuestionDao {
           final optB = (row['option_b'] as String? ?? '').trim();
           final optC = (row['option_c'] as String? ?? '').trim();
           final optD = (row['option_d'] as String? ?? '').trim();
-          final key = '${cLevel}_${topic}_${qText}_${optA}_${optB}_${optC}_${optD}';
+          final key = '$cLevel' '_' '$topic' '_' '$qText' '_' '$optA' '_' '$optB' '_' '$optC' '_' '$optD';
           existingMap[key] = id;
         }
 

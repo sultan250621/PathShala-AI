@@ -57,7 +57,7 @@ class QuestionBankMerger {
       final optB = (q['option_b']?.toString() ?? '').trim();
       final optC = (q['option_c']?.toString() ?? '').trim();
       final optD = (q['option_d']?.toString() ?? '').trim();
-      return '${cLevel}_${topic}_${text}_${optA}_${optB}_${optC}_${optD}';
+      return '$cLevel' '_' '$topic' '_' '$text' '_' '$optA' '_' '$optB' '_' '$optC' '_' '$optD';
     }
     return '';
   }

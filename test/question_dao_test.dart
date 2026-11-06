@@ -199,7 +199,7 @@ void main() {
       expect(topicCounts.length, equals(2));
     });
 
-    test('QuestionDao getRandomQuestions returns non-repeating questions', () async {
+    test('QuestionDao getRandomQuestions returns non-repeating questions when count is specified', () async {
       await QuestionLoaderService.seedQuestionBank(
         jsonContent: sampleJsonContent,
         database: db,
@@ -212,6 +212,27 @@ void main() {
       );
       expect(randomQuestions.length, equals(2));
       expect(randomQuestions[0].id != randomQuestions[1].id, isTrue);
+    });
+
+    test('QuestionDao getRandomQuestions returns ALL topic questions when count is omitted', () async {
+      await QuestionLoaderService.seedQuestionBank(
+        jsonContent: sampleJsonContent,
+        database: db,
+      );
+
+      // There are 2 Fractions questions in sampleJsonContent; no count limit should return both.
+      final allFractions = await QuestionDao.getRandomQuestions(
+        topic: 'Fractions',
+        database: db,
+      );
+      expect(allFractions.length, equals(2));
+
+      // All Algebra questions too.
+      final allAlgebra = await QuestionDao.getRandomQuestions(
+        topic: 'Algebra',
+        database: db,
+      );
+      expect(allAlgebra.length, equals(2));
     });
 
     test('QuestionDao re-seeds when data_version increases and preserves existing question IDs', () async {
