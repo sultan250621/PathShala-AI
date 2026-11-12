@@ -6,11 +6,10 @@ import '../constants/app_constants.dart';
 import '../database/progress_dao.dart';
 import '../database/question_dao.dart';
 import '../models/question_model.dart';
-import '../widgets/hint_bottom_sheet.dart';
 import '../widgets/state_views.dart';
 import 'quiz_result_screen.dart';
 
-/// Practice Quiz screen with gentle student feedback, hint sheet, and progress tracking.
+/// Practice Quiz screen with student feedback and progress tracking.
 class QuizScreen extends StatefulWidget {
   final String topic;
   final int classLevel;
@@ -357,28 +356,6 @@ class _QuizScreenState extends State<QuizScreen> {
                         height: 1.4,
                       ),
                     ),
-                    const SizedBox(height: 12),
-                    // Hint trigger
-                    if (currentQuestion.hint != null && currentQuestion.hint!.isNotEmpty)
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton.icon(
-                          onPressed: () => HintBottomSheet.show(context, currentQuestion.hint!),
-                          icon: const Icon(Icons.lightbulb_outline_rounded, size: 18, color: AppColors.accent),
-                          label: const Text(
-                            'Need a hint?',
-                            style: TextStyle(
-                              color: AppColors.accent,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14,
-                            ),
-                          ),
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            minimumSize: const Size(0, 36),
-                          ),
-                        ),
-                      ),
                   ],
                 ),
               ),
@@ -389,12 +366,6 @@ class _QuizScreenState extends State<QuizScreen> {
                 final optionText = currentQuestion.options[key] ?? '';
                 return _buildOptionButton(key, optionText, currentQuestion);
               }),
-
-              // Feedback Banner (Shown after answering)
-              if (_hasAnswered) ...[
-                const SizedBox(height: 16),
-                _buildFeedbackCard(currentQuestion),
-              ],
             ],
           ),
         ),
@@ -552,64 +523,6 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 
-  Widget _buildFeedbackCard(QuestionModel question) {
-    final isCorrect = (_selectedOptionKey?.toUpperCase() == question.correctOption.toUpperCase());
-
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 250),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: isCorrect ? AppColors.successLight.withValues(alpha: 0.6) : AppColors.errorLight.withValues(alpha: 0.6),
-        borderRadius: BorderRadius.circular(AppConstants.cardBorderRadius),
-        border: Border.all(
-          color: isCorrect ? AppColors.success.withValues(alpha: 0.4) : AppColors.error.withValues(alpha: 0.4),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                isCorrect ? Icons.celebration_rounded : Icons.lightbulb_circle_rounded,
-                color: isCorrect ? AppColors.success : AppColors.error,
-                size: 24,
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  isCorrect ? 'Well done! That is correct. ✨' : "Almost! Let's see why:",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: isCorrect ? AppColors.success : AppColors.error,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          if (question.explanation != null && question.explanation!.isNotEmpty) ...[
-            const SizedBox(height: 10),
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(
-                question.explanation!,
-                style: const TextStyle(
-                  fontSize: 15,
-                  height: 1.4,
-                  color: AppColors.textPrimary,
-                ),
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
 }
 
 /// Record of an answered question during a quiz session.

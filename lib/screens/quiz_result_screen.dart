@@ -172,24 +172,6 @@ class QuizResultScreen extends StatelessWidget {
                                         ),
                                       ),
                                     ],
-                                    if (q.explanation != null && q.explanation!.isNotEmpty) ...[
-                                      const SizedBox(height: 8),
-                                      Container(
-                                        padding: const EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                          color: AppColors.background,
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                        child: Text(
-                                          'Explanation: ${q.explanation}',
-                                          style: const TextStyle(
-                                            fontSize: 13,
-                                            color: AppColors.textSecondary,
-                                            height: 1.3,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
                                   ],
                                 ),
                               );
@@ -228,7 +210,7 @@ class QuizResultScreen extends StatelessWidget {
       themeColor = AppColors.accent;
     } else {
       encouragingMessage = 'Keep Going! 💪';
-      subMessage = 'Every mistake is a learning opportunity. Review the explanations and try once more!';
+      subMessage = 'Every mistake is a learning opportunity. Review your answers and try once more!';
       statusIcon = Icons.auto_awesome_rounded;
       themeColor = AppColors.primary;
     }
