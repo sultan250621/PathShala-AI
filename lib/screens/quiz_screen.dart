@@ -1,6 +1,8 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+
 import '../constants/app_colors.dart';
 import '../constants/app_constants.dart';
 import '../database/progress_dao.dart';
@@ -8,6 +10,7 @@ import '../database/question_dao.dart';
 import '../models/question_model.dart';
 import '../widgets/state_views.dart';
 import 'quiz_result_screen.dart';
+import '../widgets/doubt_solver_sheet.dart';
 
 /// Practice Quiz screen with student feedback and progress tracking.
 class QuizScreen extends StatefulWidget {
@@ -102,7 +105,9 @@ class _QuizScreenState extends State<QuizScreen> {
     if (_hasAnswered) return;
 
     final currentQuestion = _questions[_currentIndex];
-    final isCorrect = (optionKey.toUpperCase() == currentQuestion.correctOption.toUpperCase());
+    final isCorrect =
+        (optionKey.toUpperCase() ==
+        currentQuestion.correctOption.toUpperCase());
 
     setState(() {
       _selectedOptionKey = optionKey;
@@ -188,7 +193,11 @@ class _QuizScreenState extends State<QuizScreen> {
         ),
         content: const Text(
           'Your current quiz session is in progress. Are you sure you want to return to topics?',
-          style: TextStyle(fontSize: 15, color: AppColors.textSecondary, height: 1.4),
+          style: TextStyle(
+            fontSize: 15,
+            color: AppColors.textSecondary,
+            height: 1.4,
+          ),
         ),
         actions: [
           TextButton(
@@ -249,9 +258,7 @@ class _QuizScreenState extends State<QuizScreen> {
             },
           ),
         ),
-        body: SafeArea(
-          child: _buildBody(),
-        ),
+        body: SafeArea(child: _buildBody()),
       ),
     );
   }
@@ -316,7 +323,9 @@ class _QuizScreenState extends State<QuizScreen> {
                   value: progressFraction,
                   minHeight: 6,
                   backgroundColor: const Color(0xFFF1F5F9),
-                  valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                  valueColor: const AlwaysStoppedAnimation<Color>(
+                    AppColors.primary,
+                  ),
                 ),
               ),
             ],
@@ -334,7 +343,9 @@ class _QuizScreenState extends State<QuizScreen> {
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(AppConstants.cardBorderRadius),
+                  borderRadius: BorderRadius.circular(
+                    AppConstants.cardBorderRadius,
+                  ),
                   border: Border.all(color: AppColors.cardBorder),
                   boxShadow: [
                     BoxShadow(
@@ -370,6 +381,22 @@ class _QuizScreenState extends State<QuizScreen> {
           ),
         ),
 
+        // ---- Doubt Solver (only after answering) ----
+        if (_hasAnswered)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 4),
+            child: DoubtSolverButton(
+              questionText: _questions[_currentIndex].questionText,
+              options: [
+                _questions[_currentIndex].optionA,
+                _questions[_currentIndex].optionB,
+                _questions[_currentIndex].optionC,
+                _questions[_currentIndex].optionD,
+              ],
+              correctOption: _questions[_currentIndex].correctOption,
+              bookExplanation: _questions[_currentIndex].explanation,
+            ),
+          ),
         // ---- Bottom Action Bar ----
         if (_hasAnswered)
           Container(
@@ -383,14 +410,21 @@ class _QuizScreenState extends State<QuizScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
-                minimumSize: const Size.fromHeight(AppConstants.minTapTargetSize),
+                minimumSize: const Size.fromHeight(
+                  AppConstants.minTapTargetSize,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),
               ),
               child: Text(
-                _currentIndex < _questions.length - 1 ? 'Next Question' : 'View Results',
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                _currentIndex < _questions.length - 1
+                    ? 'Next Question'
+                    : 'View Results',
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
@@ -428,7 +462,8 @@ class _QuizScreenState extends State<QuizScreen> {
 
   Widget _buildOptionButton(String key, String text, QuestionModel question) {
     final isSelected = (_selectedOptionKey == key);
-    final isCorrectOption = (key.toUpperCase() == question.correctOption.toUpperCase());
+    final isCorrectOption =
+        (key.toUpperCase() == question.correctOption.toUpperCase());
 
     Color cardBg = AppColors.surface;
     Color borderColor = AppColors.cardBorder;
@@ -460,7 +495,10 @@ class _QuizScreenState extends State<QuizScreen> {
       decoration: BoxDecoration(
         color: cardBg,
         borderRadius: BorderRadius.circular(AppConstants.cardBorderRadius),
-        border: Border.all(color: borderColor, width: isSelected || (_hasAnswered && isCorrectOption) ? 1.5 : 1),
+        border: Border.all(
+          color: borderColor,
+          width: isSelected || (_hasAnswered && isCorrectOption) ? 1.5 : 1,
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.02),
@@ -512,9 +550,17 @@ class _QuizScreenState extends State<QuizScreen> {
                 ),
                 // Feedback icon if answered
                 if (_hasAnswered && isCorrectOption)
-                  const Icon(Icons.check_circle_rounded, color: AppColors.success, size: 22)
+                  const Icon(
+                    Icons.check_circle_rounded,
+                    color: AppColors.success,
+                    size: 22,
+                  )
                 else if (_hasAnswered && isSelected)
-                  const Icon(Icons.cancel_rounded, color: AppColors.error, size: 22),
+                  const Icon(
+                    Icons.cancel_rounded,
+                    color: AppColors.error,
+                    size: 22,
+                  ),
               ],
             ),
           ),
@@ -522,7 +568,6 @@ class _QuizScreenState extends State<QuizScreen> {
       ),
     );
   }
-
 }
 
 /// Record of an answered question during a quiz session.

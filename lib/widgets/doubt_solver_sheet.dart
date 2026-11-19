@@ -141,7 +141,7 @@ class _DoubtSolverSheetState extends State<DoubtSolverSheet> {
                   const SizedBox(height: 8),
                   ValueListenableBuilder<String>(
                     valueListenable: DoubtSolverService.instance.statusText,
-                    builder: (_, status, __) => Text(
+                    builder: (_, status, _) => Text(
                       status.isEmpty
                           ? 'উত্তর তৈরি হচ্ছে... প্রথমবার একটু সময় লাগতে পারে'
                           : status,
