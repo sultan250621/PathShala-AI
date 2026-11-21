@@ -11,6 +11,7 @@ import '../models/question_model.dart';
 import '../widgets/state_views.dart';
 import 'quiz_result_screen.dart';
 import '../widgets/doubt_solver_sheet.dart';
+import '../services/adaptive_engine.dart';
 
 /// Practice Quiz screen with student feedback and progress tracking.
 class QuizScreen extends StatefulWidget {
@@ -42,6 +43,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
   int _correctCount = 0;
   int _wrongCount = 0;
+  final AdaptiveEngine _engine = AdaptiveEngine();
 
   // Session timer
   late final Stopwatch _stopwatch;
@@ -65,7 +67,7 @@ class _QuizScreenState extends State<QuizScreen> {
   Future<void> _loadQuestions() async {
     if (widget.initialQuestions != null) {
       setState(() {
-        _questions = widget.initialQuestions!;
+        _questions = List.of(widget.initialQuestions!);
         _isLoading = false;
       });
       return;
@@ -119,6 +121,8 @@ class _QuizScreenState extends State<QuizScreen> {
       }
     });
 
+    _engine.processAnswer(isCorrect: isCorrect);
+
     // Record answer in session records for summary & review
     _answerRecords.add(
       QuizAnswerRecord(
@@ -144,6 +148,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
   void _goToNextQuestion() {
     if (_currentIndex < _questions.length - 1) {
+      _pickNextByDifficulty();
       setState(() {
         _currentIndex++;
         _selectedOptionKey = null;
@@ -152,6 +157,22 @@ class _QuizScreenState extends State<QuizScreen> {
     } else {
       _finishQuiz();
     }
+  }
+
+  /// Moves the next question with the engine's current difficulty into the next slot.
+  void _pickNextByDifficulty() {
+    final target = _engine.currentDifficulty;
+    int found = -1;
+    for (int i = _currentIndex + 1; i < _questions.length; i++) {
+      if (_questions[i].difficulty == target) {
+        found = i;
+        break;
+      }
+    }
+    if (found == -1) return; // no question left at this level, keep order
+    final tmp = _questions[_currentIndex + 1];
+    _questions[_currentIndex + 1] = _questions[found];
+    _questions[found] = tmp;
   }
 
   void _finishQuiz() {
