@@ -11,6 +11,7 @@ import '../models/question_model.dart';
 import '../widgets/state_views.dart';
 import 'quiz_result_screen.dart';
 import '../widgets/doubt_solver_sheet.dart';
+import '../services/firebase_sync_service.dart';
 import '../services/adaptive_engine.dart';
 
 /// Practice Quiz screen with student feedback and progress tracking.
@@ -130,6 +131,13 @@ class _QuizScreenState extends State<QuizScreen> {
         selectedOption: optionKey,
         isCorrect: isCorrect,
       ),
+    );
+
+    // Sync to Firebase (offline e queue, online e upload)
+    FirebaseSyncService.instance.recordAnswer(
+      topic: widget.topic,
+      difficulty: currentQuestion.difficulty,
+      isCorrect: isCorrect,
     );
 
     // Save each answer immediately to SQLite
