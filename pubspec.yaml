@@ -38,6 +38,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   onenm_local_llm: ^0.1.5
   device_info_plus: ^13.3.0
+  firebase_core: ^5.2.0
+  cloud_firestore: ^7.2.0
+  connectivity_plus: ^7.3.2
 
 dev_dependencies:
   flutter_test:

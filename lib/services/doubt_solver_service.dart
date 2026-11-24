@@ -23,8 +23,8 @@ class DoubtSolverService {
   static final DoubtSolverService instance = DoubtSolverService._();
 
   // Change only this line to test another model:
-  // OneNmModel.tinyllama, OneNmModel.qwen25, OneNmModel.gemma2b
-  static final _model = OneNmModel.qwen25;
+  // OneNmModel.tinyllama, OneNmModel.tinyllama, OneNmModel.gemma2b
+  static final _model = OneNmModel.tinyllama;
   static const Duration _timeout = Duration(seconds: 60);
 
   /// Live status text (download / loading progress) for the UI.
