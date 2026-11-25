@@ -6,7 +6,7 @@ class SyncLogModel {
   final String status; // 'pending', 'synced', 'failed'
   final DateTime timestamp;
 
-  const SyncLogModel({
+  SyncLogModel({
     this.id,
     required this.action,
     required this.payload,

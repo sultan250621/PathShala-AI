@@ -14,7 +14,7 @@ class TopicSelectionScreen extends StatefulWidget {
   final String subject;
   final int classLevel;
 
-  const TopicSelectionScreen({
+  TopicSelectionScreen({
     super.key,
     this.subject = AppConstants.defaultSubject,
     this.classLevel = AppConstants.defaultClassLevel,
@@ -70,7 +70,7 @@ class _TopicSelectionScreenState extends State<TopicSelectionScreen> {
       appBar: AppBar(
         title: Text(
           '${widget.subject} • Class ${widget.classLevel}',
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: AppColors.textPrimary,
@@ -79,7 +79,7 @@ class _TopicSelectionScreenState extends State<TopicSelectionScreen> {
         backgroundColor: AppColors.surface,
         elevation: 0,
         scrolledUnderElevation: 1,
-        iconTheme: const IconThemeData(color: AppColors.textPrimary),
+        iconTheme: IconThemeData(color: AppColors.textPrimary),
       ),
       body: SafeArea(
         child: RefreshIndicator(
@@ -93,7 +93,7 @@ class _TopicSelectionScreenState extends State<TopicSelectionScreen> {
 
   Widget _buildContent() {
     if (_isLoading) {
-      return const LoadingStateView(message: 'Loading curriculum topics...');
+      return LoadingStateView(message: 'Loading curriculum topics...');
     }
 
     if (_errorMessage != null) {
@@ -117,13 +117,13 @@ class _TopicSelectionScreenState extends State<TopicSelectionScreen> {
     }
 
     return ListView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      padding: const EdgeInsets.all(16),
+      physics: AlwaysScrollableScrollPhysics(),
+      padding: EdgeInsets.all(16),
       children: [
         // Header Info Card
         Container(
-          padding: const EdgeInsets.all(16),
-          margin: const EdgeInsets.only(bottom: 16),
+          padding: EdgeInsets.all(16),
+          margin: EdgeInsets.only(bottom: 16),
           decoration: BoxDecoration(
             color: AppColors.primarySubtle,
             borderRadius: BorderRadius.circular(AppConstants.cardBorderRadius),
@@ -131,8 +131,8 @@ class _TopicSelectionScreenState extends State<TopicSelectionScreen> {
           ),
           child: Row(
             children: [
-              const Icon(Icons.info_outline_rounded, color: AppColors.primary, size: 24),
-              const SizedBox(width: 12),
+              Icon(Icons.info_outline_rounded, color: AppColors.primary, size: 24),
+              SizedBox(width: 12),
               Expanded(
                 child: Text(
                   'Select a topic below to begin practice. Questions adapt to your pace.',

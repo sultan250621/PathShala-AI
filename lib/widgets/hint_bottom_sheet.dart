@@ -5,7 +5,7 @@ import '../constants/app_colors.dart';
 class HintBottomSheet extends StatelessWidget {
   final String hint;
 
-  const HintBottomSheet({
+  HintBottomSheet({
     super.key,
     required this.hint,
   });
@@ -23,7 +23,7 @@ class HintBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -48,25 +48,25 @@ class HintBottomSheet extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
 
           // Header
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
                   color: AppColors.accentLight,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.lightbulb_rounded,
                   color: AppColors.accent,
                   size: 26,
                 ),
               ),
-              const SizedBox(width: 14),
-              const Expanded(
+              SizedBox(width: 14),
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -91,11 +91,11 @@ class HintBottomSheet extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
 
           // Hint Content Card
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: AppColors.background,
               borderRadius: BorderRadius.circular(16),
@@ -103,14 +103,14 @@ class HintBottomSheet extends StatelessWidget {
             ),
             child: Text(
               hint.isNotEmpty ? hint : 'Take your time and read the question carefully.',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 height: 1.5,
                 color: AppColors.textPrimary,
               ),
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // Action Button
           ElevatedButton(
@@ -118,12 +118,12 @@ class HintBottomSheet extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
               foregroundColor: Colors.white,
-              minimumSize: const Size.fromHeight(48),
+              minimumSize: Size.fromHeight(48),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(14),
               ),
             ),
-            child: const Text(
+            child: Text(
               'Got it, let me try!',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),

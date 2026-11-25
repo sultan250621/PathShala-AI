@@ -6,7 +6,7 @@ class ProgressModel {
   final bool isSynced;
   final DateTime? updatedAt;
 
-  const ProgressModel({
+  ProgressModel({
     required this.topic,
     required this.correct,
     required this.total,

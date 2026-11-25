@@ -13,7 +13,7 @@ import 'topic_selection_screen.dart';
 
 /// Main Dashboard screen showing subject navigation, offline chip, and real topic progress.
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildBody() {
     if (_isLoading) {
-      return const LoadingStateView(message: 'Loading mathematics curriculum...');
+      return LoadingStateView(message: 'Loading mathematics curriculum...');
     }
 
     if (_errorMessage != null) {
@@ -109,8 +109,8 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return ListView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      physics: AlwaysScrollableScrollPhysics(),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       children: [
         // ---- Header Bar ----
         Row(
@@ -128,23 +128,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     letterSpacing: -0.5,
                   ),
                 ),
-                const SizedBox(height: 2),
-                const Text(
+                SizedBox(height: 2),
+                Text(
                   'Offline Mathematics Tutor',
                   style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
                 ),
               ],
             ),
-            const ConnectivityBanner(isOnline: false),
+            ConnectivityBanner(isOnline: false),
           ],
         ),
-        const SizedBox(height: 18),
+        SizedBox(height: 18),
 
         // ---- Greeting & Welcome Card ----
         Container(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
+            gradient: LinearGradient(
               colors: [AppColors.primary, AppColors.primaryDark],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
               BoxShadow(
                 color: AppColors.primary.withValues(alpha: 0.25),
                 blurRadius: 12,
-                offset: const Offset(0, 4),
+                offset: Offset(0, 4),
               ),
             ],
           ),
@@ -165,12 +165,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const Text(
+                    child: Text(
                       'NCTB Curriculum • Class 6',
                       style: TextStyle(
                         fontSize: 13,
@@ -179,11 +179,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  const Icon(Icons.school_rounded, color: Colors.white, size: 28),
+                  Icon(Icons.school_rounded, color: Colors.white, size: 28),
                 ],
               ),
-              const SizedBox(height: 14),
-              const Text(
+              SizedBox(height: 14),
+              Text(
                 'Mathematics - Class 6',
                 style: TextStyle(
                   fontSize: 22,
@@ -191,23 +191,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 6),
-              const Text(
+              SizedBox(height: 6),
+              Text(
                 'Practice Class 6 mathematics topics offline anytime.',
                 style: TextStyle(fontSize: 14, color: Colors.white70, height: 1.3),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               ElevatedButton.icon(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const TopicSelectionScreen(),
+                      builder: (context) => TopicSelectionScreen(),
                     ),
                   ).then((_) => _loadData());
                 },
-                icon: const Icon(Icons.play_arrow_rounded, color: AppColors.primary),
-                label: const Text(
+                icon: Icon(Icons.play_arrow_rounded, color: AppColors.primary),
+                label: Text(
                   'Start Practicing',
                   style: TextStyle(
                     fontSize: 15,
@@ -217,8 +217,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
-                  minimumSize: const Size(0, AppConstants.minTapTargetSize),
-                  padding: const EdgeInsets.symmetric(horizontal: 18),
+                  minimumSize: Size(0, AppConstants.minTapTargetSize),
+                  padding: EdgeInsets.symmetric(horizontal: 18),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -227,11 +227,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        const SizedBox(height: 24),
+        SizedBox(height: 24),
 
         // ---- Summary Banner ----
         Container(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(16),
@@ -256,13 +256,13 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        const SizedBox(height: 24),
+        SizedBox(height: 24),
 
         // ---- Topic-wise Progress Overview ----
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
+            Text(
               'Topic Progress',
               style: TextStyle(
                 fontSize: 18,
@@ -275,15 +275,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const TopicSelectionScreen(),
+                    builder: (context) => TopicSelectionScreen(),
                   ),
                 ).then((_) => _loadData());
               },
-              child: const Text('View All'),
+              child: Text('View All'),
             ),
           ],
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
 
         if (_topicCounts.isEmpty)
           EmptyStateView(
@@ -317,7 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             );
           }),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
       ],
     );
   }
@@ -331,20 +331,20 @@ class _HomeScreenState extends State<HomeScreen> {
     return Row(
       children: [
         Container(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: color.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(icon, size: 20, color: color),
         ),
-        const SizedBox(width: 10),
+        SizedBox(width: 10),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               value,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: AppColors.textPrimary,
@@ -352,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Text(
               label,
-              style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+              style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
             ),
           ],
         ),

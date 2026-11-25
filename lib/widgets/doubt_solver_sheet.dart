@@ -9,7 +9,7 @@ class DoubtSolverButton extends StatelessWidget {
   final String correctOption; // 'A'..'D'
   final String? bookExplanation;
 
-  const DoubtSolverButton({
+  DoubtSolverButton({
     super.key,
     required this.questionText,
     required this.options,
@@ -31,8 +31,8 @@ class DoubtSolverButton extends StatelessWidget {
           bookExplanation: bookExplanation,
         ),
       ),
-      icon: const Icon(Icons.psychology_alt_outlined),
-      label: const Text('Doubt Solver'),
+      icon: Icon(Icons.psychology_alt_outlined),
+      label: Text('Doubt Solver'),
     );
   }
 }
@@ -43,7 +43,7 @@ class DoubtSolverSheet extends StatefulWidget {
   final String correctOption;
   final String? bookExplanation;
 
-  const DoubtSolverSheet({
+  DoubtSolverSheet({
     super.key,
     required this.questionText,
     required this.options,
@@ -113,32 +113,32 @@ class _DoubtSolverSheetState extends State<DoubtSolverSheet> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Doubt Solver', style: theme.textTheme.titleLarge),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(widget.questionText, style: theme.textTheme.bodyLarge),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             TextField(
               controller: _controller,
               minLines: 1,
               maxLines: 3,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'তোমার প্রশ্ন লেখো (না লিখলে উত্তরটি বুঝিয়ে দেবে)',
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
                 onPressed: _loading ? null : _ask,
-                child: const Text('জিজ্ঞাসা করো'),
+                child: Text('জিজ্ঞাসা করো'),
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             if (_loading)
               Column(
                 children: [
-                  const Center(child: CircularProgressIndicator()),
-                  const SizedBox(height: 8),
+                  Center(child: CircularProgressIndicator()),
+                  SizedBox(height: 8),
                   ValueListenableBuilder<String>(
                     valueListenable: DoubtSolverService.instance.statusText,
                     builder: (_, status, _) => Text(
@@ -154,7 +154,7 @@ class _DoubtSolverSheetState extends State<DoubtSolverSheet> {
             if (_result != null)
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: theme.colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(12),
@@ -163,7 +163,7 @@ class _DoubtSolverSheetState extends State<DoubtSolverSheet> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(_label(_result!), style: theme.textTheme.labelMedium),
-                    const SizedBox(height: 6),
+                    SizedBox(height: 6),
                     Text(_result!.text, style: theme.textTheme.bodyMedium),
                   ],
                 ),

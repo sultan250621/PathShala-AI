@@ -1,29 +1,33 @@
 import 'package:flutter/material.dart';
 
-/// App color palette adhering to Week 3 design guidelines.
+/// App color palette. AppColors.isDark true hole dark rong dekhabe.
+/// theme_service.dart theke isDark set hoy.
 class AppColors {
-  // Brand & Semantic Colors
-  static const Color primary = Color(0xFF2563EB); // Royal Blue
-  static const Color primaryLight = Color(0xFF3B82F6);
-  static const Color primaryDark = Color(0xFF1D4ED8);
-  
-  static const Color accent = Color(0xFFF59E0B); // Amber Accent
-  static const Color success = Color(0xFF16A34A); // Soft Green
-  static const Color error = Color(0xFFDC2626); // Soft Error Red
-  
+  static bool isDark = false;
+
+  static Color _c(int light, int dark) => isDark ? Color(dark) : Color(light);
+
+  // Brand & Semantic
+  static Color get primary => _c(0xFF2563EB, 0xFF3B82F6);
+  static Color get primaryLight => _c(0xFF3B82F6, 0xFF60A5FA);
+  static Color get primaryDark => _c(0xFF1D4ED8, 0xFF1D4ED8);
+  static Color get accent => _c(0xFFF59E0B, 0xFFFBBF24);
+  static Color get success => _c(0xFF16A34A, 0xFF22C55E);
+  static Color get error => _c(0xFFDC2626, 0xFFEF4444);
+
   // Background & Surface
-  static const Color background = Color(0xFFF8FAFC); // Slate 50
-  static const Color surface = Colors.white;
-  static const Color cardBorder = Color(0xFFE2E8F0);
-  
+  static Color get background => _c(0xFFF8FAFC, 0xFF121212);
+  static Color get surface => _c(0xFFFFFFFF, 0xFF1E1E1E);
+  static Color get cardBorder => _c(0xFFE2E8F0, 0xFF334155);
+
   // Soft Feedback Tints
-  static const Color successLight = Color(0xFFDCFCE7); // Soft Green Highlight
-  static const Color errorLight = Color(0xFFFEE2E2); // Soft Red Highlight
-  static const Color accentLight = Color(0xFFFEF3C7); // Soft Amber Highlight
-  static const Color primarySubtle = Color(0xFFEFF6FF); // Soft Blue Highlight
+  static Color get successLight => _c(0xFFDCFCE7, 0xFF14532D);
+  static Color get errorLight => _c(0xFFFEE2E2, 0xFF7F1D1D);
+  static Color get accentLight => _c(0xFFFEF3C7, 0xFF78350F);
+  static Color get primarySubtle => _c(0xFFEFF6FF, 0xFF1E3A8A);
 
   // Text Colors
-  static const Color textPrimary = Color(0xFF1E293B); // Slate 800
-  static const Color textSecondary = Color(0xFF64748B); // Slate 500
-  static const Color textMuted = Color(0xFF94A3B8); // Slate 400
+  static Color get textPrimary => _c(0xFF1E293B, 0xFFF1F5F9);
+  static Color get textSecondary => _c(0xFF64748B, 0xFF94A3B8);
+  static Color get textMuted => _c(0xFF94A3B8, 0xFF64748B);
 }

@@ -6,7 +6,7 @@ class AIHintDialog extends StatelessWidget {
   final String content;
   final bool isLoading;
 
-  const AIHintDialog({
+  AIHintDialog({
     super.key,
     this.title = 'AI Tutor Hint',
     required this.content,
@@ -21,7 +21,7 @@ class AIHintDialog extends StatelessWidget {
   }) {
     return showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) => AIHintDialog(
@@ -35,29 +35,29 @@ class AIHintDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Icon(Icons.auto_awesome, color: Colors.purple),
-              const SizedBox(width: 8),
+              Icon(Icons.auto_awesome, color: Colors.purple),
+              SizedBox(width: 8),
               Text(
                 title,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              const Spacer(),
+              Spacer(),
               IconButton(
-                icon: const Icon(Icons.close),
+                icon: Icon(Icons.close),
                 onPressed: () => Navigator.pop(context),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           if (isLoading)
-            const Center(
+            Center(
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 24),
                 child: CircularProgressIndicator(),
@@ -66,9 +66,9 @@ class AIHintDialog extends StatelessWidget {
           else
             Text(
               content,
-              style: const TextStyle(fontSize: 15, height: 1.4),
+              style: TextStyle(fontSize: 15, height: 1.4),
             ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
         ],
       ),
     );

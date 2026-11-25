@@ -8,12 +8,15 @@ final ValueNotifier<ThemeMode> appThemeMode = ValueNotifier<ThemeMode>(ThemeMode
 /// App shuru holei shesh pasand load korbe.
 Future<void> loadThemeMode() async {
   final prefs = await SharedPreferences.getInstance();
-  appThemeMode.value = (prefs.getBool('dark_mode') ?? false) ? ThemeMode.dark : ThemeMode.light;
+  final isDark = prefs.getBool('dark_mode') ?? false;
+  AppColors.isDark = isDark;
+  appThemeMode.value = isDark ? ThemeMode.dark : ThemeMode.light;
 }
 
 /// Light <-> Dark toggle, pasand save kore rakhe.
 Future<void> toggleThemeMode() async {
   final isDark = appThemeMode.value != ThemeMode.dark;
+  AppColors.isDark = isDark;
   appThemeMode.value = isDark ? ThemeMode.dark : ThemeMode.light;
   final prefs = await SharedPreferences.getInstance();
   await prefs.setBool('dark_mode', isDark);
@@ -27,9 +30,9 @@ ThemeData darkAppTheme() {
       primary: AppColors.primary,
       secondary: AppColors.accent,
     ),
-    scaffoldBackgroundColor: const Color(0xFF121212),
+    scaffoldBackgroundColor: AppColors.background,
     cardTheme: CardThemeData(
-      color: const Color(0xFF1E1E1E),
+      color: AppColors.surface,
       elevation: 0,
     ),
   );

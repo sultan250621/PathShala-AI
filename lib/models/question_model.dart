@@ -14,7 +14,7 @@ class QuestionModel {
   final String? hint;
   final String? explanation;
 
-  const QuestionModel({
+  QuestionModel({
     this.id,
     this.classLevel = 6,
     this.subject = 'Mathematics',

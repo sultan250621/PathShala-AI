@@ -23,7 +23,7 @@ Future<void> main() async {
 
 /// Root application widget configuring Material 3 theme and offline typography.
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
           'Segoe UI',
           'sans-serif',
         ],
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           displayLarge: TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.bold,
@@ -105,7 +105,7 @@ class MyApp extends StatelessWidget {
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppConstants.cardBorderRadius),
-            side: const BorderSide(color: AppColors.cardBorder),
+            side: BorderSide(color: AppColors.cardBorder),
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -113,11 +113,11 @@ class MyApp extends StatelessWidget {
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
             elevation: 0,
-            minimumSize: const Size.fromHeight(AppConstants.minTapTargetSize),
+            minimumSize: Size.fromHeight(AppConstants.minTapTargetSize),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
             ),
-            textStyle: const TextStyle(
+            textStyle: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -126,8 +126,8 @@ class MyApp extends StatelessWidget {
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             foregroundColor: AppColors.primary,
-            minimumSize: const Size.fromHeight(AppConstants.minTapTargetSize),
-            side: const BorderSide(color: AppColors.primary),
+            minimumSize: Size.fromHeight(AppConstants.minTapTargetSize),
+            side: BorderSide(color: AppColors.primary),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
             ),
@@ -139,7 +139,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const HomeScreen(),
+      home: HomeScreen(),
     );
   }
 }

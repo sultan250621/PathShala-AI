@@ -5,7 +5,7 @@ class ConnectivityBanner extends StatelessWidget {
   final bool isOnline;
   final bool isSyncing;
 
-  const ConnectivityBanner({
+  ConnectivityBanner({
     super.key,
     this.isOnline = false,
     this.isSyncing = false,
@@ -36,7 +36,7 @@ class ConnectivityBanner extends StatelessWidget {
     }
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(12),
@@ -46,7 +46,7 @@ class ConnectivityBanner extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(icon, size: 14, color: fg),
-          const SizedBox(width: 4),
+          SizedBox(width: 4),
           Text(
             text,
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: fg),

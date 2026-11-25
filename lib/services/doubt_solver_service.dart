@@ -11,7 +11,7 @@ class DoubtResult {
   final String text;
   final DoubtSource source;
   final Duration? elapsed;
-  const DoubtResult(this.text, this.source, [this.elapsed]);
+  DoubtResult(this.text, this.source, [this.elapsed]);
 }
 
 /// Offline Doubt Solver.
@@ -64,7 +64,7 @@ class DoubtSolverService {
     try {
       _ai ??= OneNm(
         model: _model,
-        settings: const GenerationSettings(
+        settings: GenerationSettings(
           temperature: 0.3,
           topK: 40,
           topP: 0.9,
@@ -85,7 +85,7 @@ class DoubtSolverService {
   DoubtResult _fallback(String? bookExplanation) {
     final t = (bookExplanation ?? '').trim();
     if (t.isEmpty) {
-      return const DoubtResult(
+      return DoubtResult(
         'এই ফোনে Doubt Solver এখন চালু করা যাচ্ছে না।',
         DoubtSource.unavailable,
       );
@@ -127,7 +127,7 @@ class DoubtSolverService {
     String? studentDoubt,
   }) async {
     if (_busy) {
-      return const DoubtResult(
+      return DoubtResult(
         'আগের উত্তর তৈরি হচ্ছে, একটু অপেক্ষা করো।',
         DoubtSource.unavailable,
       );

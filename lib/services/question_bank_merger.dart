@@ -13,7 +13,7 @@ class MergeResult {
   final String targetPath;
   final String chapterPath;
 
-  const MergeResult({
+  MergeResult({
     required this.oldVersion,
     required this.newVersion,
     required this.existingCount,
@@ -87,7 +87,7 @@ class QuestionBankMerger {
     } else if (chapterParsed is List<dynamic>) {
       incomingQuestions = chapterParsed;
     } else {
-      throw const FormatException(
+      throw FormatException(
         'Invalid chapter JSON: expected an object with a "questions" array or an array of questions.',
       );
     }

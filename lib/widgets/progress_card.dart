@@ -8,7 +8,7 @@ class ProgressCard extends StatelessWidget {
   final int? questionCount;
   final VoidCallback? onTap;
 
-  const ProgressCard({
+  ProgressCard({
     super.key,
     required this.topic,
     required this.percent,
@@ -36,7 +36,7 @@ class ProgressCard extends StatelessWidget {
     }
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
@@ -45,7 +45,7 @@ class ProgressCard extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.03),
             blurRadius: 8,
-            offset: const Offset(0, 2),
+            offset: Offset(0, 2),
           ),
         ],
       ),
@@ -56,7 +56,7 @@ class ProgressCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -69,7 +69,7 @@ class ProgressCard extends StatelessWidget {
                         children: [
                           Text(
                             topic,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                               color: AppColors.textPrimary,
@@ -77,10 +77,10 @@ class ProgressCard extends StatelessWidget {
                             ),
                           ),
                           if (questionCount != null) ...[
-                            const SizedBox(height: 4),
+                            SizedBox(height: 4),
                             Text(
                               '$questionCount practice questions',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 13,
                                 color: AppColors.textSecondary,
                               ),
@@ -89,9 +89,9 @@ class ProgressCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
                         color: progressColor.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(12),
@@ -107,30 +107,30 @@ class ProgressCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: LinearProgressIndicator(
                     value: percent.clamp(0.0, 1.0),
                     minHeight: 8,
-                    backgroundColor: const Color(0xFFF1F5F9),
+                    backgroundColor: Color(0xFFF1F5F9),
                     valueColor: AlwaysStoppedAnimation<Color>(progressColor),
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       statusText,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 13,
                         color: AppColors.textSecondary,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     if (onTap != null)
-                      const Icon(
+                      Icon(
                         Icons.arrow_forward_ios_rounded,
                         size: 14,
                         color: AppColors.textMuted,
