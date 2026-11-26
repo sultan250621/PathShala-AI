@@ -1,199 +1,79 @@
 {
   "questions": [
     {
-      "class_level": 6,
-      "topic": "বীজগণিতীয় রাশি",
-      "difficulty": 1,
       "question_text": "8m² × 2m³ এর মান কোনটি?",
-      "option_a": "16m",
-      "option_b": "4m²",
-      "option_c": "16m⁵",
-      "option_d": "16m³",
       "correct_option": "C",
-      "hint": "সহগ দুটি গুণ করো, আর একই ভিত্তির সূচক যোগ করো।",
-      "explanation": "8m² × 2m³ = (8 × 2) m²⁺³ = 16m⁵"
+      "explanation": "ধাপ ১: সহগ গুণ করো: ৮ × ২ = ১৬।\nধাপ ২: একই ভিত্তি m এর সূচক যোগ করো: m² × m³ = m²⁺³ = m⁵।\nধাপ ৩: উত্তর হলো ১৬m⁵।\nউত্তর: 16m⁵ (C)"
     },
     {
-      "class_level": 6,
-      "topic": "বীজগণিতীয় রাশি",
-      "difficulty": 2,
       "question_text": "3a²b × 5ab² × 4ab = কত?",
-      "option_a": "12ab",
-      "option_b": "60a⁴b⁴",
-      "option_c": "12a⁴b⁴",
-      "option_d": "60a²b²",
       "correct_option": "B",
-      "hint": "আগে সহগ 3 × 5 × 4 গুণ করো, তারপর a ও b এর সূচক আলাদা আলাদা যোগ করো।",
-      "explanation": "সহগ = 3 × 5 × 4 = 60। a এর সূচক = 2 + 1 + 1 = 4, b এর সূচক = 1 + 2 + 1 = 4। উত্তর 60a⁴b⁴"
+      "explanation": "ধাপ ১: সহগ গুণ করো: ৩ × ৫ × ৪ = ৬০।\nধাপ ২: a এর সূচক যোগ করো: ২ + ১ + ১ = ৪।\nধাপ ৩: b এর সূচক যোগ করো: ১ + ২ + ১ = ৪।\nধাপ ৪: উত্তর ৬০a⁴b⁴।\nউত্তর: 60a⁴b⁴ (B)"
     },
     {
-      "class_level": 6,
-      "topic": "বীজগণিতীয় রাশি",
-      "difficulty": 1,
       "question_text": "x = 1 হলে, x² − x = কত?",
-      "option_a": "2",
-      "option_b": "1",
-      "option_c": "0",
-      "option_d": "−1",
       "correct_option": "C",
-      "hint": "x এর জায়গায় 1 বসাও।",
-      "explanation": "x² − x = 1² − 1 = 1 − 1 = 0"
+      "explanation": "ধাপ ১: x এর জায়গায় ১ বসাও।\nধাপ ২: ১² − ১ = ১ − ১ = ০।\nউত্তর: ০ (C)"
     },
     {
-      "class_level": 6,
-      "topic": "বীজগণিতীয় রাশি",
-      "difficulty": 1,
       "question_text": "x⁵ × x³ এ x এর সূচক কোনটি?",
-      "option_a": "x²⁰",
-      "option_b": "8",
-      "option_c": "x⁹",
-      "option_d": "20",
       "correct_option": "B",
-      "hint": "গুণ করলে একই ভিত্তির সূচক যোগ হয়। প্রশ্নে শুধু সূচকটি চাওয়া হয়েছে।",
-      "explanation": "x⁵ × x³ = x⁵⁺³ = x⁸, তাই x এর সূচক 8"
+      "explanation": "ধাপ ১: একই ভিত্তির গুণে সূচক যোগ হয়: ৫ + ৩ = ৮।\nধাপ ২: তাই x⁵ × x³ = x⁸।\nউত্তর: সূচক ৮ (B)"
     },
     {
-      "class_level": 6,
-      "topic": "বীজগণিতীয় রাশি",
-      "difficulty": 1,
       "question_text": "x³ × x⁷ = কত?",
-      "option_a": "21",
-      "option_b": "10",
-      "option_c": "x²¹",
-      "option_d": "x¹⁰",
       "correct_option": "D",
-      "hint": "সূচক যোগ করো, গুণ নয়। আর উত্তরে x থাকবে।",
-      "explanation": "x³ × x⁷ = x³⁺⁷ = x¹⁰"
+      "explanation": "ধাপ ১: সূচক যোগ করো: ৩ + ৭ = ১০।\nধাপ ২: তাই x³ × x⁷ = x¹⁰।\nউত্তর: x¹⁰ (D)"
     },
     {
-      "class_level": 6,
-      "topic": "বীজগণিতীয় রাশি",
-      "difficulty": 2,
       "question_text": "a³ × a⁻³ এর মান কোনটি?",
-      "option_a": "a⁶",
-      "option_b": "a⁹",
-      "option_c": "a⁰",
-      "option_d": "a⁻⁶",
       "correct_option": "C",
-      "hint": "ঋণাত্মক সূচকসহ যোগ করার সময় চিহ্ন খেয়াল করো: 3 + (−3) কত?",
-      "explanation": "a³ × a⁻³ = a³⁻³ = a⁰"
+      "explanation": "ধাপ ১: সূচক যোগ করো: ৩ + (−৩) = ০।\nধাপ ২: তাই a³ × a⁻³ = a⁰।\nউত্তর: a⁰ (C)"
     },
     {
-      "class_level": 6,
-      "topic": "বীজগণিতীয় রাশি",
-      "difficulty": 1,
       "question_text": "5a³ × a⁴ এ a এর সূচক কোনটি?",
-      "option_a": "3",
-      "option_b": "4",
-      "option_c": "7",
-      "option_d": "a⁷",
       "correct_option": "C",
-      "hint": "a এর সূচক দুটি যোগ করো। সহগ 5 সূচক নয়।",
-      "explanation": "5a³ × a⁴ = 5a³⁺⁴ = 5a⁷। এখানে a এর সূচক = 7"
+      "explanation": "ধাপ ১: a এর সূচক যোগ করো: ৩ + ৪ = ৭।\nধাপ ২: তাই 5a³ × a⁴ = 5a⁷।\nউত্তর: সূচক ৭ (C)"
     },
     {
-      "class_level": 6,
-      "topic": "বীজগণিতীয় রাশি",
-      "difficulty": 2,
       "question_text": "a⁻⁸ × a⁻³ = কত?",
-      "option_a": "a⁻⁵",
-      "option_b": "a⁵",
-      "option_c": "a⁻¹¹",
-      "option_d": "a¹¹",
       "correct_option": "C",
-      "hint": "−8 এবং −3 যোগ করলে চিহ্ন ঋণাত্মকই থাকে।",
-      "explanation": "a⁻⁸ × a⁻³ = a⁻⁸⁺⁽⁻³⁾ = a⁻⁸⁻³ = a⁻¹¹"
+      "explanation": "ধাপ ১: সূচক যোগ করো: (−৮) + (−৩) = −১১।\nধাপ ২: তাই a⁻⁸ × a⁻³ = a⁻¹¹।\nউত্তর: a⁻¹¹ (C)"
     },
     {
-      "class_level": 6,
-      "topic": "বীজগণিতীয় রাশি",
-      "difficulty": 2,
       "question_text": "5x² × 4x⁴ এর মান নিচের কোনটি?",
-      "option_a": "x⁶",
-      "option_b": "20x⁶",
-      "option_c": "20x⁸",
-      "option_d": "9x⁶",
       "correct_option": "B",
-      "hint": "সহগ গুণ করো (যোগ নয়), আর সূচক যোগ করো।",
-      "explanation": "5x² × 4x⁴ = (5 × 4) x²⁺⁴ = 20x⁶"
+      "explanation": "ধাপ ১: সহগ গুণ করো: ৫ × ৪ = ২০।\nধাপ ২: x এর সূচক যোগ করো: ২ + ৪ = ৬।\nধাপ ৩: উত্তর ২০x⁶।\nউত্তর: 20x⁶ (B)"
     },
     {
-      "class_level": 6,
-      "topic": "বীজগণিতীয় রাশি",
-      "difficulty": 2,
       "question_text": "P = 2 হলে, P³ + 5P² এর মান কত?",
-      "option_a": "12",
-      "option_b": "10",
-      "option_c": "24",
-      "option_d": "28",
       "correct_option": "D",
-      "hint": "P এর জায়গায় 2 বসিয়ে আলাদা আলাদা পদের মান বের করো, তারপর যোগ করো।",
-      "explanation": "P³ + 5P² = (2)³ + 5 × 2² = 8 + 20 = 28"
+      "explanation": "ধাপ ১: P এর জায়গায় ২ বসাও: (২)³ + ৫ × (২)²।\nধাপ ২: ২³ = ৮, ২² = ৪।\nধাপ ৩: ৮ + ৫ × ৪ = ৮ + ২০ = ২৮।\nউত্তর: 28 (D)"
     },
     {
-      "class_level": 6,
-      "topic": "বীজগণিতীয় রাশি",
-      "difficulty": 3,
       "question_text": "a = −5, b = 2, c = −1 হলে, (a + b)(b − c) এর মান কত?",
-      "option_a": "−5",
-      "option_b": "−7",
-      "option_c": "9",
-      "option_d": "−9",
       "correct_option": "D",
-      "hint": "আগে দুটি বন্ধনীর মান আলাদা করে বের করো। b − c এ c ঋণাত্মক, তাই চিহ্ন বদলে যাবে।",
-      "explanation": "(a + b)(b − c) = (−5 + 2){2 − (−1)} = (−3)(2 + 1) = (−3) × 3 = −9"
+      "explanation": "ধাপ ১: প্রথম বন্ধনী: (−৫ + ২) = −৩।\nধাপ ২: দ্বিতীয় বন্ধনী: ২ − (−১) = ২ + ১ = ৩।\nধাপ ৩: গুণ করো: (−৩) × ৩ = −৯।\nউত্তর: −9 (D)"
     },
     {
-      "class_level": 6,
-      "topic": "বীজগণিতীয় রাশি",
-      "difficulty": 1,
       "question_text": "x³ + 2³ = কত?",
-      "option_a": "3(x + 2)",
-      "option_b": "x³ + 6",
-      "option_c": "x³ + 8",
-      "option_d": "3x + 6",
       "correct_option": "C",
-      "hint": "2³ মানে 2 × 2 × 2। x³ কে বদলানোর দরকার নেই।",
-      "explanation": "2³ = 2 × 2 × 2 = 8, তাই x³ + 2³ = x³ + 8"
+      "explanation": "ধাপ ১: ২³ = ২ × ২ × ২ = ৮।\nধাপ ২: তাই x³ + ২³ = x³ + ৮।\nউত্তর: x³ + 8 (C)"
     },
     {
-      "class_level": 6,
-      "topic": "বীজগণিতীয় রাশি",
-      "difficulty": 2,
       "question_text": "a = 6, b = 4 এবং c = 8 হলে, ab/c এর মান কোনটি?",
-      "option_a": "9",
-      "option_b": "3",
-      "option_c": "16/3",
-      "option_d": "1/12",
       "correct_option": "B",
-      "hint": "আগে ab = a × b বের করো, তারপর c দিয়ে ভাগ করো।",
-      "explanation": "ab/c = (6 × 4)/8 = 24/8 = 3"
+      "explanation": "ধাপ ১: ab = ৬ × ৪ = ২৪।\nধাপ ২: ab/c = ২৪ ÷ ৮ = ৩।\nউত্তর: 3 (B)"
     },
     {
-      "class_level": 6,
-      "topic": "বীজগণিতীয় রাশি",
-      "difficulty": 2,
       "question_text": "m² + m − 6 রাশিতে m = −2 হলে, রাশিটির মান কত?",
-      "option_a": "−3",
-      "option_b": "−4",
-      "option_c": "4",
-      "option_d": "8",
       "correct_option": "B",
-      "hint": "(−2)² = +4 হয়, কিন্তু m এর জায়গায় বসানো −2 ঋণাত্মকই থাকবে।",
-      "explanation": "m² + m − 6 = (−2)² + (−2) − 6 = 4 − 2 − 6 = −4"
+      "explanation": "ধাপ ১: m² = (−২)² = ৪।\nধাপ ২: m = −২।\nধাপ ৩: ৪ + (−২) − ৬ = ৪ − ২ − ৬ = −৪।\nউত্তর: −4 (B)"
     },
     {
-      "class_level": 6,
-      "topic": "বীজগণিতীয় রাশি",
-      "difficulty": 1,
       "question_text": "(10)³ = কত?",
-      "option_a": "100",
-      "option_b": "103",
-      "option_c": "110",
-      "option_d": "1000",
       "correct_option": "D",
-      "hint": "10 কে তিনবার নিজের সাথে গুণ করো।",
-      "explanation": "(10)³ = 10 × 10 × 10 = 1000"
+      "explanation": "ধাপ ১: ১০³ = ১০ × ১০ × ১০।\nধাপ ২: ১০ × ১০ = ১০০, ১০০ × ১০ = ১০০০।\nউত্তর: 1000 (D)"
     }
   ]
 }
